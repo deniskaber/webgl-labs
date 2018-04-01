@@ -15,7 +15,7 @@ function init() {
   scene.add( mesh );
 
   // https://threejs.org/docs/index.html#api/geometries/SphereBufferGeometry
-  var sphereGeometry = new THREE.SphereBufferGeometry( 141.422, 6, 6 );
+  var sphereGeometry = new THREE.SphereBufferGeometry( 115, 6, 6 );
   sphere = new THREE.Mesh( sphereGeometry, material );
 
   scene.add( sphere );
