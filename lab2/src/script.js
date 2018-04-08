@@ -15,19 +15,13 @@ function init() {
 
   container = document.getElementById( 'container' );
 
-  camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
+  camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 1, 1000 );
+  // camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
   camera.position.z = 400;
   scene = new THREE.Scene();
 
-  var light = new THREE.PointLight( 0xff2200 );
-  light.position.set( 100, 100, 100 );
-  scene.add( light );
-
-  var light = new THREE.AmbientLight( 0x111111 );
-  scene.add( light );
-
   var geometry = new THREE.BoxGeometry( 100, 100, 100 );
-  var material = new THREE.MeshLambertMaterial( { color: 0xffffff, morphTargets: true } );
+  var material = new THREE.MeshBasicMaterial( { wireframe: true, morphTargets: true } );
 
   // construct 8 blend shapes
 
@@ -92,7 +86,7 @@ function render() {
   mesh.rotation.y += 0.005;
 
   if (mesh.morphTargetInfluences[ 2 ] > 1) {
-    morphDirection = -1;
+    morphDirection = 0;
   } else if (mesh.morphTargetInfluences[ 2 ] < -1) {
     morphDirection = 1;
   }
