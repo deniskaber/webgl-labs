@@ -44,9 +44,11 @@ function init() {
     .setPath( 'textures/' )
     .load( [ 'px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png' ] );
 
+  var loader = new THREE.TGALoader();
+
   // https://threejs.org/docs/index.html#api/geometries/CylinderBufferGeometry
   var cylinderGeometry = new THREE.CylinderBufferGeometry( 50, 50, 150, 32 );
-  var material = new THREE.MeshPhongMaterial( { color: 0xffffff, envMap: cubeMap } );
+  var material = new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: cubeMap, map: loader.load('textures/metal.tga') } );
 
   cylinder = new THREE.Mesh( cylinderGeometry, material );
   scene.add( cylinder );
@@ -55,7 +57,7 @@ function init() {
 
   // https://threejs.org/docs/index.html#api/geometries/SphereBufferGeometry
   var sphereGeometry = new THREE.SphereBufferGeometry( 115, 6, 6 );
-  material = new THREE.MeshPhongMaterial( { color: 0xccddff } );
+  material = new THREE.MeshLambertMaterial( { color: 0xccddff, map: loader.load('textures/metal.tga') } );
   sphere = new THREE.Mesh( sphereGeometry, material );
   scene.add( sphere );
 
@@ -63,7 +65,7 @@ function init() {
 
   // https://threejs.org/docs/index.html#api/geometries/ConeBufferGeometry
   var coneGeometry = new THREE.ConeBufferGeometry( 50, 150, 32 );
-  material = new THREE.MeshPhongMaterial( { color: 0xccddff, opacity: 0.7, transparent: true } );
+  material = new THREE.MeshLambertMaterial( { color: 0xccddff, opacity: 0.7, transparent: true, map: loader.load('textures/metal.tga') } );
   cone = new THREE.Mesh( coneGeometry, material );
   scene.add( cone );
 

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My first three.js app</title>
+    <style>
+        body {
+            font-family: Monospace;
+            background-color: #f0f0f0;
+            margin: 0px;
+            overflow: hidden;
+        }
+
+        a {
+            color: #ffffff;
+        }
+    </style>
+
+    <script type="x-shader/x-vertex" id="vertexshader">
+			uniform float amplitude;
+			attribute float size;
+			attribute float opacity;
+			attribute vec3 customColor;
+			varying vec4 vColor;
+			void main() {
+				vColor = vec4(customColor, opacity );
+				vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+				gl_PointSize = size;
+				gl_Position = projectionMatrix * mvPosition;
+			}
+    </script>
+
+    <script type="x-shader/x-fragment" id="fragmentshader">
+			uniform vec3 color;
+			uniform sampler2D texture;
+			varying vec4 vColor;
+			void main() {
+				gl_FragColor = vec4( vColor );
+				gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );
+			}
+    </script>
+</head>
+<body>
+    <div id="container"></div>
+
+    <script src="three.min.js"></script>
+    <script src="tga-loader.js"></script>
+    <script src="OrbitControls.js"></script>
+    <script src="TrackballControls.js"></script>
+    <script src="GPUParticleSystem.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
